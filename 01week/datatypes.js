@@ -3,13 +3,11 @@
 // logs current date
 
 let displayDate = function() {
-	let date = new Date();
-	console.log(date);
-	console.log(typeof(date));
+	let currentDate = new Date();
+	console.log('The current date is: ' + currentDate);
+	console.log('The date is a type of: ' + typeof(currentDate));
 }
-
 displayDate();
-
 
 // convert number to string
 
@@ -26,7 +24,7 @@ convertNumber();
 // Convert string to number
 
 let convertString = function(x) {
-	parseInt(x);
+	let newString = parseInt(x);
 	console.log(x);
 	console.log(typeof(x));
 }
@@ -43,17 +41,14 @@ let dataTypes = function(y) {
 
 dataTypes('true');
 
-
 // adding two integers
 
-let calculator = function(a, b){ 
+let calculator = function(a, b){
 	let sum = a + b;
 	console.log(sum);
 	console.log(typeof(sum));
 }
 calculator(2, 6);
-
-
 
 // run if both things are true
 
@@ -106,10 +101,3 @@ let strConvert = function(testString){
 }
 
 strConvert('10');
-
-
-
-
-
-
-
