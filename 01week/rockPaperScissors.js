@@ -11,14 +11,29 @@ const rl = readline.createInterface({
 function rockPaperScissors(hand1, hand2) {
 
   // Write code here
-  let y = hand1.toLowerCase().trim();
-  let x = hand2.toLowerCase().trim();
+  let leftHand = hand1.toLowerCase().trim();
+  let rightHand = hand2.toLowerCase().trim();
 
-  // if else for each condition of x v. y
-  // return answer
+  // Compares all the combinations of hand1 v hand2 and returns the winner or tie
+  // Invalid input returns error message
 
-  console.log(y + " " + x);
-
+  if ( leftHand === rightHand ) {
+    return("It's a tie!");
+  } else if ( leftHand === 'rock' && rightHand === 'paper' ){
+    return("Hand two wins!");
+  } else if ( leftHand === 'rock' && rightHand === 'scissors' ){
+      return("Hand one wins!");
+  } else if ( leftHand === 'paper' && rightHand === 'rock' ){
+      return("Hand one wins!");
+  } else if ( leftHand === 'paper' && rightHand === 'scissors' ){
+      return("Hand two wins!");
+  } else if ( leftHand === 'scissors' && rightHand === 'paper' ){
+      return("Hand one wins!");
+  } else if ( leftHand === 'scissors' && rightHand === 'rock' ){
+      return("Hand two wins!");
+  } else {
+      return('Invalid input. Options: Rock, Paper or Scissors');
+  }
 }
 
 function getPrompt() {
