@@ -21,10 +21,6 @@ function pigLatin(word) {
 
     let lowerWord = word.toLowerCase().trim();
 
-    // I figured there was a regex solution to finding the vowel, even though I had to look it up
-
-    // let needle = lowerWord.match(/[aeiou]/gi);
-
     let a = lowerWord.indexOf('a');
     let e = lowerWord.indexOf('e');
     let i = lowerWord.indexOf('i');
@@ -33,41 +29,45 @@ function pigLatin(word) {
 
     let min = null;
 
-    if (min == null || min > a && a > 0) {
-      let min = a;
-    } else if (min == null || min > e && e > 0) {
-      let min = e;
-    } else if (min == null || min > i && i > 0) {
-      let min = i;
-    } else if (min == null || min > o && o > 0) {
-      let min = o;
-    } else if (min == null || min > u && u > 0) {
-      let min = u;
+    if (a > -1 && (min > a || min == null)) {
+      min = a;
     }
+
+    if (e > -1 && (min > e || min == null)) {
+      min = e;
+    }
+
+    if (i > -1 && (min > i || min == null)) {
+      min = i;
+    }
+
+    if (o > -1 && (min > o || min == null)) {
+      min = o;
+    }
+
+    if (u > -1 && (min > u || min == null)) {
+      min = u;
+    }
+
+    let pigWord;
 
     if (min === 0) {
 
-      let pigWord = lowerWord + "yay";
-      console.log(pigWord);
+      pigWord = lowerWord + "yay";
 
-    } else if (min === 1) {
+    } else if (min == null) {
 
-      let firstHalf = lowerWord.substring(0,1);
-      let secondHalf = lowerWord.substring(1);
-      let pigWord = secondHalf + firstHalf + "ay";
-      console.log(pigWord);
+      pigWord = lowerWord + "ay";
 
     } else {
 
       let firstHalf = lowerWord.substring(0, min);
       let secondHalf = lowerWord.substring(min);
-      let pigWord = secondHalf + firstHalf + "ay";
-      console.log(pigWord);
+      pigWord = secondHalf + firstHalf + "ay";
 
     }
-
+    return pigWord;
 }
-
 
 function getPrompt() {
   rl.question('word ', (answer) => {
