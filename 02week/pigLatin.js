@@ -8,9 +8,9 @@ const rl = readline.createInterface({
 });
 
 
+
 function pigLatin(word) {
 
-  // Your code here
   // set word variable
   // Define what vowels are (needles)
   // 3 cases
@@ -18,17 +18,53 @@ function pigLatin(word) {
   //  - if - Move letters up until first vowel (indexOf needle > 1)
   //  - if - First letter is a vowel, add yay (indexOf needle is 0)
 
-  // multiple needles (a, e, i, o, u, y)
-  // which needle has smaller index
 
-    let haystack = "bob is a nice guy";
-    let needle = "y";
-    console.log(haystack.indexOf(needle));
+    let lowerWord = word.toLowerCase().trim();
 
-    let fullWord = "straw";
-    let firstHalf = fullWord.substring(0,3); // 3 index of first vowel
-    let secondHalf = fullWord.substring(3);
-    console.log(firstHalf);
+    // I figured there was a regex solution to finding the vowel, even though I had to look it up
+
+    // let needle = lowerWord.match(/[aeiou]/gi);
+
+    let a = lowerWord.indexOf('a');
+    let e = lowerWord.indexOf('e');
+    let i = lowerWord.indexOf('i');
+    let o = lowerWord.indexOf('o');
+    let u = lowerWord.indexOf('u');
+
+    let min = null;
+
+    if (min == null || min > a && a > 0) {
+      let min = a;
+    } else if (min == null || min > e && e > 0) {
+      let min = e;
+    } else if (min == null || min > i && i > 0) {
+      let min = i;
+    } else if (min == null || min > o && o > 0) {
+      let min = o;
+    } else if (min == null || min > u && u > 0) {
+      let min = u;
+    }
+
+    if (min === 0) {
+
+      let pigWord = lowerWord + "yay";
+      console.log(pigWord);
+
+    } else if (min === 1) {
+
+      let firstHalf = lowerWord.substring(0,1);
+      let secondHalf = lowerWord.substring(1);
+      let pigWord = secondHalf + firstHalf + "ay";
+      console.log(pigWord);
+
+    } else {
+
+      let firstHalf = lowerWord.substring(0, min);
+      let secondHalf = lowerWord.substring(min);
+      let pigWord = secondHalf + firstHalf + "ay";
+      console.log(pigWord);
+
+    }
 
 }
 
