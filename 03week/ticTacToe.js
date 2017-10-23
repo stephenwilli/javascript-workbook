@@ -24,23 +24,92 @@ function printBoard() {
 }
 
 function horizontalWin() {
-  // Your code here
+
+  // CHECKS IF EACH ROW IS EQUAL
+
+  if (board[0][0] === playerTurn && board[0][1] === playerTurn && board[0][2] === playerTurn) {
+    return true;
+   } else if (board[1][0] === playerTurn &&  board[1][1] === playerTurn && board[1][2] === playerTurn) {
+    return true;
+  } else if (board[2][0] === playerTurn &&  board[2][1] === playerTurn && board[2][2] === playerTurn) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function verticalWin() {
-  // Your code here
+
+  // CHECKS IF EACH COLUMN IS EQUAL
+
+  if (board[0][0] === playerTurn && board[1][0] === playerTurn && board[2][0] === playerTurn) {
+    return true;
+  } else if (board[0][1] === playerTurn &&  board[1][1] === playerTurn && board[2][1] === playerTurn) {
+    return true;
+  } else if (board[0][2] === playerTurn &&  board[1][2] === playerTurn && board[2][2] === playerTurn) {
+    return true;
+  } else {
+    return false;
+  }
+
 }
 
 function diagonalWin() {
-  // Your code here
+
+  // CHECKS BOTH DIAGONAL POSSIBILITES
+
+  if (board[0][0] === playerTurn && board[1][1] === playerTurn && board[2][2] === playerTurn) {
+    return true;
+  } else if (board[0][2] === playerTurn &&  board[1][1] === playerTurn && board[2][0] === playerTurn) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function checkForWin() {
-  // Your code here
+
+  // CHECKS FOR EACH WIN FUNCTION
+
+  if (horizontalWin() || verticalWin() || diagonalWin() ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function ticTacToe(row, column) {
-  // Your code here
+
+  let rowNumber = parseInt(row);
+  let columnNumber = parseInt(column);
+
+  if (playerTurn === 'X') {
+
+    // PLACE MARKER
+    board[rowNumber][columnNumber] = 'X';
+
+    //CHECK FOR WIN
+    if (checkForWin()) {
+      console.log("There's a win! Player " + playerTurn + " wins!")
+    }
+
+    // SWITCH PLAYER
+    playerTurn = 'O';
+
+  } else {
+
+    // PLACE MARKER
+    board[rowNumber][columnNumber] = 'O';
+
+    //CHECK FOR WIN
+    if (checkForWin()) {
+      console.log("There's a win! Player " + playerTurn + " wins!")
+    }
+
+    // SWITCH PLAYER
+    playerTurn = 'X';
+  }
+
 }
 
 function getPrompt() {
