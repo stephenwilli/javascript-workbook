@@ -90,7 +90,7 @@ function ticTacToe(row, column) {
 
     //CHECK FOR WIN
     if (checkForWin()) {
-      console.log("There's a win! Player " + playerTurn + " wins!")
+      console.log("There's a win! Player " + playerTurn + " wins!");
     }
 
     // SWITCH PLAYER
@@ -103,7 +103,7 @@ function ticTacToe(row, column) {
 
     //CHECK FOR WIN
     if (checkForWin()) {
-      console.log("There's a win! Player " + playerTurn + " wins!")
+      console.log("There's a win! Player " + playerTurn + " wins!");
     }
 
     // SWITCH PLAYER
