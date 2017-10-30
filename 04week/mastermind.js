@@ -1,5 +1,6 @@
 'use strict';
 
+const colors = require('colors');
 const assert = require('assert');
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -28,13 +29,39 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function generateHint() {
-  // your code here
+function generateHint(solution, guess) {
+
+  /*
+  * This function prints the matching letters (in Red) or letter & positions (in Green) between the guess
+  * and solution.
+  *
+  * @param: soltion - The randomly generated solution
+  * @param: guess - the guess entered into the prompt
+  *
+  * @return: Color coded numbers
+  */
+
+
+
 }
 
 function mastermind(guess) {
+
+  /*
+  *  This function detects if the guess matches the solution. If true, the player wins, if false it
+  *  responds with generateHint that shows the correct postitions in the guess and ask the player to guesss again.
+  *  Should also test if the guess is a string of four letters between a and h.
+  *
+  *  @param: guess - the inputted string of four letters
+  *  @return: true/false
+  */
+
   solution = 'abcd'; // Comment this out to generate a random solution
-  // your code here
+  if(guess === solution) {
+    console.log(colors.green('You guessed it!'));
+  } else {
+    printBoard();
+  }
 }
 
 
@@ -61,14 +88,15 @@ if (typeof describe === 'function') {
   });
 
   describe('#generateHint()', () => {
-    it('should generate hints', () => {
-      assert.equal(generateHint('abdc'), '2-2');
+      it('should generate hints', () => {
+        let expected = ('2'.red)+"-"+('2'.white);
+        assert.equal(generateHint('abdc'), expected);
+      });
+      it('should generate hints if solution has duplicates', () => {
+        let expected = ('1'.red)+"-"+('1'.white);
+        assert.equal(generateHint('aabb'), expected);
+      });
     });
-    it('should generate hints if solution has duplicates', () => {
-      assert.equal(generateHint('aabb'), '1-1');
-    });
-
-  });
 
 } else {
 
