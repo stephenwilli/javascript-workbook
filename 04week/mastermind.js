@@ -16,6 +16,7 @@ function printBoard() {
   for (let i = 0; i < board.length; i++) {
     console.log(board[i]);
   }
+
 }
 
 function generateSolution() {
@@ -29,41 +30,80 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function generateHint(solution, guess) {
+function generateHint(guess) {
 
   /*
   * This function prints the matching letters (in Red) or letter & positions (in Green) between the guess
   * and solution.
   *
-  * @param: soltion - The randomly generated solution
+  *
   * @param: guess - the guess entered into the prompt
   *
   * @return: Color coded numbers
   */
 
+  let guessArray = guess.split('');
+  let solutionArray = solution.split('');
 
 
+  let correctLocation = 0;
+  let j = 0;
+
+  while(j < guessArray.length) {
+    if (solutionArray[j] === guessArray[j]){
+      correctLocation = correctLocation + 1;
+    }
+    j++;
+  }
+
+  let correctLetter = 0;
+  let i = 0;
+
+  while(i < guessArray.length) {
+    let guessIndex = solutionArray.indexOf(guessArray[i]);
+    if (guessIndex > -1) {
+        correctLetter = correctLetter + 1;
+        solutionArray[guessIndex] = null;
+    }
+    i++;
+  }
+
+  let hint = colors.green(correctLocation) + " - " + colors.red(correctLetter);
+  return hint;
 }
 
 function mastermind(guess) {
 
   /*
   *  This function detects if the guess matches the solution. If true, the player wins, if false it
-  *  responds with generateHint that shows the correct postitions in the guess and ask the player to guesss again.
-  *  Should also test if the guess is a string of four letters between a and h.
+  *  responds with generateHint that shows the correct postitions in the guess and ask the player to guess again.
+  *  Also pushes the guess to the board to track.
+  *  Should test if the guess is a string of four letters between a and h and give the player 10 turns to guess
   *
   *  @param: guess - the inputted string of four letters
   *  @return: true/false
   */
 
-  solution = 'abcd'; // Comment this out to generate a random solution
-  if(guess === solution) {
-    console.log(colors.green('You guessed it!'));
+  // solution = 'abcd'; // Comment this out to generate a random solution
+
+  let lowerGuess = guess.toLowerCase().trim();
+
+  if (lowerGuess.length > 4){
+    console.log('Your guess can only be 4 letters between a - h');
   } else {
-    printBoard();
+
+    if(lowerGuess === solution) {
+      console.log(colors.green('Correct. You win!'));
+      process.exit();
+    } else if (board.length < 10) {
+        let hint = generateHint(lowerGuess);
+        board.push(lowerGuess + ' : ' + hint);
+    } else if (board.length >= 10) {
+        console.log('You only get 10 guesses, the solution was ' + solution);
+        process.exit();
+    }
   }
 }
-
 
 function getPrompt() {
   rl.question('guess: ', (guess) => {
