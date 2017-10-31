@@ -33,9 +33,8 @@ function getRandomInt(min, max) {
 function generateHint(guess) {
 
   /*
-  * This function prints the matching letters (in Red) or letter & positions (in Green) between the guess
-  * and solution.
-  *
+  * This function checks for matches between the guess and solution
+  * Returns the matching letters (in Red) or letter & positions (in Green)
   *
   * @param: guess - the guess entered into the prompt
   *
@@ -45,7 +44,7 @@ function generateHint(guess) {
   let guessArray = guess.split('');
   let solutionArray = solution.split('');
 
-
+// Find correct letter locations
   let correctLocation = 0;
   let j = 0;
 
@@ -56,6 +55,7 @@ function generateHint(guess) {
     j++;
   }
 
+// Find correct letters
   let correctLetter = 0;
   let i = 0;
 
@@ -68,8 +68,10 @@ function generateHint(guess) {
     i++;
   }
 
+// Returns the color coded hint
   let hint = colors.green(correctLocation) + " - " + colors.red(correctLetter);
   return hint;
+  
 }
 
 function mastermind(guess) {
