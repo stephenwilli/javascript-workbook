@@ -9,41 +9,98 @@ let jobTypes = {
   programmer: 'Any Ship!'
 };
 
-class crew {
-  constructor(name, job, specialSkill, ship){
+/*
+* CrewMember Class
+* This class creates a CrewMember object on each instantiaion with the following parameters and function:
+* @param name: crew member's name
+* @param job: crew member's job
+* @param specialSkill: crew member's special skill
+* @param ship: crew member's current ship
+*
+* @function enterShip: pushes the crew member into a ship
+*
+*/
+
+class CrewMember {
+  constructor(name, job, specialSkill){
       this.name = name;
       this.job = job;
       this.specialSkill = specialSkill;
       this.ship = null;
   }
 
-  enterShip(shipName){
-    let shipName = this.ship;
+  enterShip(shipEntered){
+    this.ship = shipEntered;
+    shipEntered.crew.push(this);
   }
 }
 
-class ship {
+/*
+* Ship Class
+* This class creates a Ship object on each instantiaion with the following parameters and function:
+* @param name: ship's name
+* @param type: ship's type
+* @param ability: ship's ability
+* @param crew: crew member's currently on ship
+*
+* @function missionStatement: loops through the ships crew to see if a crew members job matches the jobtype
+* required for the ship to go on its mission
+*
+* @return: ship's ability if the correct crew job type is aboard
+*/
+
+class Ship {
   constructor(name, type, ability){
     this.name = name;
     this.type = type;
     this.ability = ability;
-    this.crew = null;
+    this.crew = [];
   }
 
   missionStatement(){
-    // prints statement if correct crew member
 
+      let i = 0;
+      let mission = false;
+
+      // Checks for each crew member aboard for thier job
+
+      while(i < this.crew.length){
+        let crewJob = this.crew[i].job;
+        // console.log(crewJob);
+        if (((jobTypes[crewJob])==(this.type))||(this.crew[i].job=='programmer')){
+          mission = true;
+        }
+        i++
+      }
+
+      if (mission == true){
+        console.log(this.ability);
+      } else {
+        console.log("Can't perform a mission yet.");
+      }
   }
 }
 
-crewMember1 = new crew(James Bond, pilot, badass)
-enterShip('MAV');
-
 /*
- make 2 classes - crew member & ship
-* crew - name, a job, a skill and Ship(currently on), enterShip(add crew to ship object);
-ship - name type ability crew(list currently on ship), missionStatement(returns the ship ability as a string if ther is a crew whose job matches ship type);
+* Test instances
+*
 */
+
+let crewPilot = new CrewMember('James Bond', 'programmer', 'badass');
+let crewProgrammer = new CrewMember('Michael Douglas', 'pilot', 'sneaky');
+
+let ship1 = new Ship('Rocket', 'MAV', 'fly');
+let ship2 = new Ship('Tanker', 'Main Ship', 'haul');
+
+crewPilot.enterShip(ship1);
+crewProgrammer.enterShip(ship2);
+// console.log(crewPilot);
+// console.log(crewProgrammer);
+
+ship1.missionStatement();
+ship2.missionStatement();
+
+
 
 //tests
 if (typeof describe === 'function'){
