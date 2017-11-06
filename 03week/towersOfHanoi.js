@@ -39,6 +39,7 @@ function isLegal(startStack, endStack) {
 
   /*
   * This function checks if the moving piece is smaller than the piece it is moved on top of
+  * Also check if the entry is a stack
   *
   * @param: startStack - The array the piece starts at
   * @param: endStack - The array the piece ends at
@@ -77,7 +78,6 @@ function towersOfHanoi(startStack, endStack) {
 
   if (isLegal(startStack, endStack)){
     movePiece(startStack, endStack);
-
   } else {
     console.log('Illegal Move');
   }
@@ -92,8 +92,8 @@ function towersOfHanoi(startStack, endStack) {
 
 function getPrompt() {
   printStacks();
-  rl.question('start stack: ', (startStack) => {
-    rl.question('end stack: ', (endStack) => {
+  rl.question('start stack (a, b or c): ', (startStack) => {
+    rl.question('end stack (a, b or c): ', (endStack) => {
       towersOfHanoi(startStack, endStack);
       getPrompt();
     });
