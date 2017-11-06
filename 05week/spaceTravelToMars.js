@@ -9,7 +9,41 @@ let jobTypes = {
   programmer: 'Any Ship!'
 };
 
-// Your code here
+class crew {
+  constructor(name, job, specialSkill, ship){
+      this.name = name;
+      this.job = job;
+      this.specialSkill = specialSkill;
+      this.ship = null;
+  }
+
+  enterShip(shipName){
+    let shipName = this.ship;
+  }
+}
+
+class ship {
+  constructor(name, type, ability){
+    this.name = name;
+    this.type = type;
+    this.ability = ability;
+    this.crew = null;
+  }
+
+  missionStatement(){
+    // prints statement if correct crew member
+
+  }
+}
+
+crewMember1 = new crew(James Bond, pilot, badass)
+enterShip('MAV');
+
+/*
+ make 2 classes - crew member & ship
+* crew - name, a job, a skill and Ship(currently on), enterShip(add crew to ship object);
+ship - name type ability crew(list currently on ship), missionStatement(returns the ship ability as a string if ther is a crew whose job matches ship type);
+*/
 
 //tests
 if (typeof describe === 'function'){
