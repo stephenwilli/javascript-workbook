@@ -10,6 +10,8 @@ const rl = readline.createInterface({
 
 function Checker() {
   // Your code here
+
+  
 }
 
 function Board() {
