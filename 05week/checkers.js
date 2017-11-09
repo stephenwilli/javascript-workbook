@@ -7,9 +7,32 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+/*
 
-function Checker() {
-  // Your code here
+2 colors - red black
+Each 12 pieces on the odd spaces
+Pieces can only move forward, diagonaly
+if there is a space past a piece, the piece leaps over and removes that piece
+if there is a second option, you can capture again with the same piece
+if you get to the other side, you become kinged and can move in any direction
+
+Checker class (color, symbol, position)
+
+board class(3 arrays, 2 sets of pieces and the board)
+
+game class(turn, holds board)
+
+functions
+
+checker.move (start position, end position)
+
+*/
+
+function Checker(s) {
+  
+  // Creates a checkers class with a symbol parameter
+  this.symbol = s;
+  
 }
 
 function Board() {
@@ -51,17 +74,92 @@ function Board() {
     }
     console.log(string);
   };
-
-  // Your code here
 }
 function Game() {
 
   this.board = new Board();
-
+  
   this.start = function() {
     this.board.createGrid();
-    // Your code here
+    
+    /*
+    * Places checkers onto even spaces of the Board
+    * Rows 0 - 3 for Checker X
+    * Rows 5 - 8 for Checker O
+    * 
+    *
+    */
+    
+    for( let rowX = 0; rowX < 3; rowX++ ){
+      for ( let columnX = 0; columnX < 8; columnX++ ){
+        if ((rowX + columnX) %2 === 0){
+          this.board.grid[rowX][columnX] = new Checker('X');
+        }
+      }
+    }
+    
+    for( let rowO = 5; rowO < 8; rowO++ ){
+      for ( let columnO = 0; columnO < 8; columnO++ ){
+        if ((rowO + columnO) %2 === 0){
+          this.board.grid[rowO][columnO] = new Checker('O');
+        }
+      }
+    }
+      
   };
+  
+  // Changes player from X to O and back again
+  
+  this.playerTurn = 'X';
+  
+  this.switch = function() {
+    if(this.playerTurn === 'X') {
+      this.playerTurn = 'O';
+    } else if (this.playerTurn === 'O') {
+      this.playerTurn = 'X';
+    }
+  };
+  
+  /*
+  * Moves the marker from one position to the other
+  * Takes in 4 elements: startPosition, endPosition
+  * 
+  * Call Switch player function
+  *
+  */
+  
+  this.moveChecker = function(startPosition, endPosition) {
+    
+    // Split input into 4 numbers 
+    
+    let startRow = parseInt(startPosition.substring(0, 1));
+    let startColumn = parseInt(startPosition.substring(1, 2));
+    let endRow = parseInt(endPosition.substring(0, 1));
+    let endColumn = parseInt(endPosition.substring(1, 2));
+        
+    // check for valid move
+    
+    
+    
+        
+    // Place new marker and Remove old marker
+    
+    if (this.playerTurn === 'X') {
+      this.board.grid[endRow][endColumn] = new Checker('X');
+    }
+    
+    if (this.playerTurn === 'O') {
+      this.board.grid[endRow][endColumn] = new Checker('O');
+    }
+    
+    this.board.grid[startRow][startColumn] === null;
+
+    // Switch player
+    
+    this.switch();
+    console.log('It is player ', this.playerTurn,'s turn');
+  };
+  
 }
 
 function getPrompt() {
