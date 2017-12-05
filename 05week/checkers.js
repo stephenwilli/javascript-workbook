@@ -7,9 +7,11 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
-function Checker() {
-  // Your code here
+function Checker(s) {
+  
+  // Creates a checkers class with a symbol parameter
+  this.symbol = s;
+  
 }
 
 function Board() {
@@ -51,18 +53,107 @@ function Board() {
     }
     console.log(string);
   };
-
-  // Your code here
+  
+  /*
+  * Places checkers onto even spaces of the Board
+  * Rows 0 - 3 for Checker X
+  * Rows 5 - 8 for Checker O
+  */
+  
+  this.checkers = function() {
+    for( let rowX = 0; rowX < 3; rowX++ ){
+      for ( let columnX = 0; columnX < 8; columnX++ ){
+        if ((rowX + columnX) %2 === 0){
+          this.grid[rowX][columnX] = new Checker('X');
+        }
+      }
+    }
+    
+    for( let rowO = 5; rowO < 8; rowO++ ){
+      for ( let columnO = 0; columnO < 8; columnO++ ){
+        if ((rowO + columnO) %2 === 0){
+          this.grid[rowO][columnO] = new Checker('O');
+        }
+      }
+    }
+  }
+  
+  /*
+  * Places checkers onto even spaces of the Board
+  * Rows 0 - 3 for Checker X
+  * Rows 5 - 8 for Checker O
+  */
+  
+  
 }
+
 function Game() {
 
   this.board = new Board();
-
+  
   this.start = function() {
+    
     this.board.createGrid();
-    // Your code here
+    this.board.checkers();
+
   };
-}
+  
+  // Changes player from X to O and back again
+  
+  this.playerTurn = 'X';
+  
+  this.switch = function() {
+    if(this.playerTurn === 'X') {
+      this.playerTurn = 'O';
+    } else if (this.playerTurn === 'O') {
+      this.playerTurn = 'X';
+    }
+  };
+  
+  /*
+  * Moves the marker from one position to the other
+  * Takes in 2 params: startPosition, endPosition
+  * 
+  * Call Switch player function
+  *
+  */
+  
+  this.moveChecker = function(startPosition, endPosition) {
+    
+    // Split input into 4 numbers 
+    
+    let startRow = parseInt(startPosition.substring(0, 1));
+    let startColumn = parseInt(startPosition.substring(1, 2));
+    let endRow = parseInt(endPosition.substring(0, 1));
+    let endColumn = parseInt(endPosition.substring(1, 2));
+        
+    // check for valid move
+    
+    // Column must be even
+    // endrow must be 1+ higher than startRow
+    // if 
+    
+        
+    // Place new marker for each move
+    
+    if (this.playerTurn === 'X') {
+      this.board.grid[endRow][endColumn] = new Checker('X');
+      game.board.grid[startRow][startColumn] = null;
+    }
+    
+    if (this.playerTurn === 'O') {
+      this.board.grid[endRow][endColumn] = new Checker('O');
+      game.board.grid[startRow][startColumn] = null;
+    }
+    
+    // Switch player
+    
+    this.switch();
+    console.log('It is player ', this.playerTurn,'s turn');
+    
+  }; // End moveChecker
+  
+} // End Game
 
 function getPrompt() {
   game.board.viewGrid();

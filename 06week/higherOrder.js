@@ -2,24 +2,98 @@
 
 const assert = require('assert');
 
+/*
+* Call the callback for each item in the array
+* @param arr
+* @param callback
+*/
+
 function forEach(arr, callback) {
-  // Your code here
+  let count = 0;
+  let i = 0;
+
+  while ( i < arr.length ) {
+    callback(count++);
+    i++
+  }
+  return count;
 }
+
+/*
+* Returns a new array with the callback applied to each item in the array
+* @param arr
+* @param callback
+*/
 
 function map(arr, callback) {
-  // Your code here
+  let i = 0;
+  let newArray = [];
+  
+  while ( i < arr.length ) {
+    let newNum = callback(arr[i]);
+    newArray.push(newNum);
+    i++
+  }
+  return newArray;
 }
+
+/*
+* Returns a new array with the items that pass the callback
+* @param arr
+* @param callback
+*/
 
 function filter(arr, callback) {
-  // Your code here
+  let newArray = [];
+  let i = 0;
+
+  while(i < arr.length){
+    if(callback(arr[i])){
+      newArray.push(arr[i]);
+    }
+    i++
+  }
+  
+  return newArray;
 }
+
+/*
+* Returns true for the first item that matches the callback requirement 
+* Returns false if no items in the array match the requirement
+* @param arr
+* @param callback
+*/
 
 function some(arr, callback) {
-  // Your code here
+  
+  let i = 0;
+
+  while(i < arr.length){
+    if(callback(arr[i]) == true){
+      return true;
+    } 
+    i++
+  }
+  return false;
 }
 
+/*
+* Returns true if each item in the array match the requirement
+* Returns false if any items in the array match the requirement
+* @param arr
+* @param callback
+*/
+
 function every(arr, callback) {
-  // Your code here
+  let i = 0;
+
+  while(i < arr.length){
+    if(callback(arr[i]) == false){
+      return false;
+    } 
+    i++
+  }
+  return true;
 }
 
 if (typeof describe === 'function') {
